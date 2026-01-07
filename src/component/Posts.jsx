@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { deleteApi, getApi } from "../api/PostApi";
 import Form from "./Form";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Posts = () => {
   const [data, setData] = useState([]);
@@ -28,6 +30,7 @@ const Posts = () => {
       const res = await deleteApi(id);
       if (res.status === 200) {
         const updateData = data.filter((cur) => cur.id !== id);
+        toast.success("Post Deleted successfully");
         setData(updateData);
       } else {
         console.log("Please Check status", res.status);
